@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Amy ❤</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #ff758c, #ff7eb3);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #e91e63;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      position: absolute;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #4caf50;
+      color: white;
+      left: 20%;
+      bottom: 0;
+    }
+
+    #no {
+      background: #f44336;
+      color: white;
+      right: 20%;
+      bottom: 0;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #555;
+    }
+
+    img {
+      margin-top: 15px;
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    /* Fireworks */
+    .firework {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, red, yellow, transparent);
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(8); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <audio id="music" loop>
+    <source src="perfect.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="box" id="box">
+    <h1>💍 Amy, Will You Marry Me?</h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">YES 💖</button>
+      <button id="no" onclick="runAway()">NO 💔</button>
+    </div>
+
+    <div id="result"></div>
+    <p style="font-size:14px;color:#999;">(Tap YES to start the magic 🎵)</p>
+  </div>
+
+  <script>
+    function runAway() {
+      const noBtn = document.getElementById("no");
+
+      // Make sure the button stays fully on the screen
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      const messages = [
+        "Amy… please think again 🥺",
+        "My heart is shaking 💔",
+        "You can't escape fate 😭",
+        "Love is chasing you 😈",
+        "Say YES already 😭❤"
+      ];
+
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("result").innerHTML = randomMsg;
+    }
+
+    function sayYes() {
+      document.getElementById("music").play();
+
+      document.getElementById("box").innerHTML = `
+        <h1>AMYYYY!!! 💍💖</h1>
+        <h2>You just made my entire life perfect 😭❤</h2>
+        <img src="https://media1.tenor.com/m/UBVICUlVILMAAAAd/hug-blush.gif">
+        <p>Forever starts now… and I promise it's you always 😘</p>
+      `;
+
+      startFireworks();
+    }
+
+    function startFireworks() {
+      setInterval(() => {
+        const fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.left = Math.random() * window.innerWidth + "px";
+        fw.style.top  = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(fw);
+
+        setTimeout(() => {
+          fw.remove();
+        }, 1000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
